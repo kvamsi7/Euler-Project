@@ -20,7 +20,7 @@ def is_prime(n):
 #print(is_prime(5))
 for i in range(2,int(math.sqrt(num))+1):
 	if is_prime(i):
-		print(i)
+#		print(i)
 		if (num % i == 0):
 			prime_factors.append(i)
 
