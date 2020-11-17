@@ -25,8 +25,17 @@ The four adjacent digits in the 1000-digit number that have the greatest product
 71636269561882670428252483600823257530420752963450
 
 Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
+
+>>> print(largestProductInSeries(long_string,4))
+    ('9989', 5832)
+
+>>> print(largestProductInSeries(long_string,13))
+    ('5576689664895', 23514624000)
+
+
 """
 import numpy as np
+import sys
 
 long_string = '''73167176531330624919225119674426574742355349194934\
 96983520312774506326239578318016984801869478851843\
@@ -49,53 +58,47 @@ long_string = '''73167176531330624919225119674426574742355349194934\
 05886116467109405077541002256983155200055935729725\
 71636269561882670428252483600823257530420752963450'''
 
-short_string = '7316717653133062491922511967442657474'
+# def cum_prod(string):
+#     """return the cummulative prod of the given string number
 
-
-def cum_prod(string):
-    """return the cummulative prod of the given string number
-
-    Args:
-        string (string): string needs to ne eval
-    """
-    prod = 1
-    for digit in string:
-        prod *= int(digit)
-    return prod
+#     Args:
+#         string (string): string needs to ne eval
+#     """
+#     prod = 1
+#     for digit in string:
+#         prod *= int(digit)
+#     return prod
 
 
 def largestProductInSeries(string : str,length:int):
-    """funciton take the long number as string and will return the largest poduct in series number with 
+    """funciton take the long number as string and will return the largest sequence digits which have the largest poduct in series number with 
        the given length
 
     Args:
         string (sting): long interger or string 
         length (Integer): lenght the lardest product in series 
     """
-    str_length = len(string)
-    greatest_prod_digits = 0
-    greatest_prod = 0 
+    
+    greatest_prod = -sys.maxsize -1
+    greatest_prod_digits = ""
+    for i in range(len(string)-length-1):
+        prod_digits = ""
+        product = 1
+        for j in range(length):
+            digit = int(string[i+j])
+            prod_digits = prod_digits+str(digit)
+            product *= digit
+            
+        print(greatest_prod_digits+" "+str(product))
+        
+        if product > greatest_prod :
+            greatest_prod = product
+            greatest_prod_digits = prod_digits
 
-    for i in range(0,str_length):
-        digits = string[i:length]
-        # print(digits)
-        prod = cum_prod(digits)
-        # print(digits+" "+str(prod))
-
-        if greatest_prod < prod :
-            greatest_prod = prod
-            greatest_prod_digits = digits
-        length += 1
     return (greatest_prod_digits,greatest_prod)
 
-
-# print(largestProductInSeries(long_string,4))
-
 if __name__ == '__main__' :
-    print(largestProductInSeries(long_string,26))
-    
-    # print(largestProductInSeries(short_string,4))
-        
+    print(largestProductInSeries(long_string,4))
 
 
 
