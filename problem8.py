@@ -34,7 +34,6 @@ Find the thirteen adjacent digits in the 1000-digit number that have the greates
 
 
 """
-import numpy as np
 import sys
 
 long_string = '''73167176531330624919225119674426574742355349194934\
